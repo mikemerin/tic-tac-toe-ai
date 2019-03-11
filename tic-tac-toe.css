@@ -14,12 +14,13 @@ td {
 	height: 50px;
 }
 
-.playboard {
+.playboard, #controls {
 	cursor: pointer;
-	border: 5px solid black;
 }
 
-
+.playboard {
+	border: 5px solid black;
+}
 
 td:nth-child(2) {
 	border-left-color: white;

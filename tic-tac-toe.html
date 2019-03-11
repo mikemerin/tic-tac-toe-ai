@@ -4,7 +4,11 @@
 		<title>Tic Tac Toe AI</title>
 		<link rel="stylesheet" href="tic-tac-toe.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script type="text/javascript" src="./javascript/tic-tac-toe.js"></script>
+		<script type="text/javascript" src="./javascript/board.js"></script>
+		<script type="text/javascript" src="./javascript/common.js"></script>
+		<script type="text/javascript" src="./javascript/game.js"></script>
+		<script type="text/javascript" src="./javascript/winner.js"></script>
+		
 	</head>
 	<body>
 		<h1>Welcome to Tic Tac Toe AI!</h1>
@@ -18,5 +22,11 @@
 		</div>
 	</body>
 </html>
+
+<script>
+	$(document).ready(function(e) {
+		reset_page();
+	});
+</script>
 
 <!-- future todo: two columns, possible moves on left. step 1: show all moves and pick one that will win. step 2: train the model to pick the best move -->

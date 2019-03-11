@@ -1,102 +1,70 @@
-document.addEventListener("DOMContentLoaded", function(e) {
-	console.log("ready!")
-})
+class Board {
+	constructor() {
+		this.board_size = 3;
+		this.board = [];
+	}
+	
+	create_board(board_size) {
+		this.board_size = board_size;
+		for (let i = 0; i < this.board_size; i++) {
+			var alphabet_array = create_alphabet_array(this.board_size).map(letter => letter + (i + 1));
+			this.board.push(alphabet_array);
+		}
+	}
+	
+	reset_board() {
+		this.board = [];
+	}
+	
+	display_board() {
+		var board_HTML = "<table><tr><td></td>";
+		create_alphabet_array(this.board.length).forEach(letter => {
+			board_HTML += "<td>" + letter + "</td>";
+	    	})
+		board_HTML += "</tr>";
+		
+		this.board.forEach((row, row_number) => {
+			board_HTML += "<tr><td>" + (row_number + 1) + "</td>" +
+					"<td class='playboard'>" + row.join("</td><td class='playboard'>") + "</td></tr>";
+		})
+		board_HTML += "</table>";
+		document.getElementById("board").innerHTML = board_HTML;
+	}
+	
+	check_if_winner() {
+		winner = false;
 
-
-function create_board(board_size) {
-	var board = [];
-	for (let i = 0; i < board_size; i++) {
-		var row = [];
-		for (let r = 1; r <= board_size; r++) {
-    		row.push(i*board_size + r);
-        }
-		board.push(row);
+		get_win_lines(this.board).forEach(line => {
+			if (line.every((value) => value === line[0] && line[0] != "")) {
+				winner = line[0];
+			};
+		})
+		console.log(winner);
+		return winner;
 	}
 
-	return board;
-}
-
-function create_board(board_size) {
-	var board = [];
-	for (let i = 0; i < board_size; i++) {
-		var row = [];
-		for (let r = 1; r <= board_size; r++) {
-    		row.push(i*board_size + r);
-        }
-		board.push(row);
+	get_win_lines() {
+		var win_lines = this.board;
+		win_lines = win_lines.concat(this.get_columns(this.board));
+		win_lines = win_lines.concat(this.get_diagonals(this.board));
+		return win_lines;
 	}
 
-	return board;
+	get_columns() {
+		return this.board.map((row, row_number) => {
+			return this.board.map(column => column[row_number]);
+		})
+	}
+
+	get_diagonals() {
+	    var diagonal_left = [];
+	    var diagonal_right = [];
+
+	    this.board.forEach((row, row_number) => {
+	        diagonal_left.push( row[row.length - row_number - 1] );
+	        diagonal_right.push( row[row_number] );
+	    })
+	    return [diagonal_left, diagonal_right];
+	}
+	
 }
-
-//------------------------------------------------------------------
-
-function check_if_winner(board) {
-	winner = false;
-
-	get_win_lines(board).forEach(line => {
-		if (line.every((value) => value === line[0])) {
-			winner = line[0];
-		};
-	})
-	console.log(draw_board(board));
-	console.log(winner);
-	return winner;
-}
-
-function get_win_lines(board) {
-	var win_lines = board;
-	win_lines = win_lines.concat(get_columns(board));
-	win_lines = win_lines.concat(get_diagonals(board));
-	return win_lines;
-}
-
-function get_columns(board) {
-	return board.map((row, row_number) => {
-		return board.map(column => column[row_number]);
-	})
-}
-
-function get_diagonals(board) {
-
-    var diagonal_left = [];
-    var diagonal_right = [];
-
-    board.forEach((row, row_number) => {
-        diagonal_left.push( row[row.length - row_number - 1] );
-        diagonal_right.push( row[row_number] );
-    })
-
-    return [diagonal_left, diagonal_right];
-
-}
-
-//------------------------------------------------------------------
-
-var test_boards = [
-	[["X","X","X"],[4,5,6],[7,8,9]],
-	[["X","X","O"],[4,5,6],[7,8,9]],
-	[[1,"X","X"],["X",5,6],[7,8,9]],
-	[[1,2,3],["X","X","X"],[7,8,9]],
-	[[1,2,3],[4,5,6],["X","X","X"]],
-	[["X",2,3],["X",5,6],["X",8,9]],
-	[[1,"X",3],[4,"X",6],[7,"X",9]],
-	[[1,2,"X"],[4,5,"X"],[7,8,"X"]],
-	[["X",2,3],[4,"X",6],[7,8,"X"]],
-	[[1,2,"X"],[4,"X",6],["X",8,9]]
-]
-
-//------------------------------------------------------------------
-
-function draw_board(board) {
-	console.log(
-	board.forEach((row, row_number) => {
-		console.log( row_number + 1 + " - | " + row.join(" | ") + " |");
-	})
-}
-
-//------------------------------------------------------------------
-
-var board_size = 3;
-var board = create_board(board_size);
-
