@@ -9,10 +9,11 @@ function create_alphabet_array(letters) {
 function reset_page() {
 	$("#instructions")[0].innerText = "What size board would you like to play?";
 	$("#controls")[0].innerText = "3";
+	$("#board_array")[0].innerHTML = "";
 	$("#controls").click(e => {
 		start_game(parseInt(e.target.innerText, 10));
 	})
-	$("#board").remove();
+	$("#board")[0].innerHTML = "";
 }
 
 function start_game(board_size) {

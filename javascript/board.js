@@ -86,7 +86,17 @@ class Board extends winner {
 			)
 		);
 		
-		$("#analytics_div").append($("<h3>", { text: "[" + this.board + "]" }) );
-	}	
+		this.attach_listeners();
+		
+		$("#board_array").append( this.board.map(cell => $("<p>", { text: cell.join(", ") })) );
+	}
+	
+	attach_listeners() {
+		$(".playboard").each((i, cell) => {
+			$(cell).click(e => {
+				console.log(cell.id)
+		    })
+		})
+	}
 }
 
