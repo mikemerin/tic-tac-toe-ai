@@ -62,7 +62,7 @@ class Board extends winner {
 		$("#board").remove();
 		
 		var header = create_alphabet_array(this.board.length).map(letter => {
-			return "<td>" + letter + "</td>";
+			return $("<td>", { class: "board_cell", text: letter });
 	    })
 	    
 	    var body = this.board.map((row, row_number) => {
@@ -72,19 +72,21 @@ class Board extends winner {
 	    	})
 			
 	    	return $("<tr>").append(
-				$("<td>", { text: row_number + 1 }),
+				$("<td>", { class: "board_cell", text: row_number + 1 }),
 				playboard
 			)
 		})
 		
 		$("#board_div").append(
-			$("<table>").append(
+			$("<table>", { id: "board" }).append(
 				$("<tr>").append(
-					"<td></td>" + header
+					$("<td>"), header
 				),
 				body
 			)
-		);		
+		);
+		
+		$("#analytics_div").append($("<h3>", { text: "[" + this.board + "]" }) );
 	}	
 }
 

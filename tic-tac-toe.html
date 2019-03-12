@@ -10,14 +10,18 @@
 		
 	</head>
 	<body>
-		<h1>Welcome to Tic Tac Toe AI!</h1>
-		<p id="instructions"></p>
-		<hr>
-		<div id="controls_div">
+		<div class="top_left">
+			<h2>Welcome to Tic Tac Toe AI!</h2>
+			<p id="instructions"></p>
 			<h3 id="controls"></h3>
 		</div>
-		<div id="board_div">
+		
+		<div class="top_right" id="board_div">
 			<table id="board"></table>
+		</div>
+		
+		<div class="bottom" id="analytics_div">
+			
 		</div>
 	</body>
 </html>
@@ -28,4 +32,4 @@
 	});
 </script>
 
-<!-- future todo: two columns, possible moves on left. step 1: show all moves and pick one that will win. step 2: train the model to pick the best move -->
+<!-- future todo: possible moves on bottom. step 1: show all moves and pick one that will win. step 2: train the model to pick the best move -->

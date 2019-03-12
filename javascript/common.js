@@ -12,7 +12,7 @@ function reset_page() {
 	$("#controls").click(e => {
 		start_game(parseInt(e.target.innerText, 10));
 	})
-	$("#board")[0].innerHTML = "";
+	$("#board").remove();
 }
 
 function start_game(board_size) {
