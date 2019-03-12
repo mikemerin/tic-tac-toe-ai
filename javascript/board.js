@@ -1,35 +1,4 @@
-class Board {
-	constructor() {
-		this.board_size = 3;
-		this.board = [];
-	}
-	
-	create_board(board_size) {
-		this.board_size = board_size;
-		for (let i = 0; i < this.board_size; i++) {
-			var alphabet_array = create_alphabet_array(this.board_size).map(letter => letter + (i + 1));
-			this.board.push(alphabet_array);
-		}
-	}
-	
-	reset_board() {
-		this.board = [];
-	}
-	
-	display_board() {
-		var board_HTML = "<table><tr><td></td>";
-		create_alphabet_array(this.board.length).forEach(letter => {
-			board_HTML += "<td>" + letter + "</td>";
-	    	})
-		board_HTML += "</tr>";
-		
-		this.board.forEach((row, row_number) => {
-			board_HTML += "<tr><td>" + (row_number + 1) + "</td>" +
-					"<td class='playboard'>" + row.join("</td><td class='playboard'>") + "</td></tr>";
-		})
-		board_HTML += "</table>";
-		document.getElementById("board").innerHTML = board_HTML;
-	}
+class winner {
 	
 	check_if_winner() {
 		winner = false;
@@ -66,5 +35,56 @@ class Board {
 	    })
 	    return [diagonal_left, diagonal_right];
 	}
-	
 }
+
+
+class Board extends winner {
+	constructor() {
+		super();
+		this.board_size = 3;
+		this.board = [];
+	}
+	
+	create_board(board_size) {
+		this.board_size = board_size;
+		for (let i = 0; i < this.board_size; i++) {
+			var alphabet_array = create_alphabet_array(this.board_size).map(letter => letter + (i + 1));
+			this.board.push(alphabet_array);
+		}
+	}
+	
+	reset_board() {
+		this.board = [];
+	}
+	
+	display_board() {
+		
+		$("#board").remove();
+		
+		var header = create_alphabet_array(this.board.length).map(letter => {
+			return "<td>" + letter + "</td>";
+	    })
+	    
+	    var body = this.board.map((row, row_number) => {
+
+	    	var playboard = row.map(cell => {
+	    		return $("<td>",  { class: 'playboard', id: cell });
+	    	})
+			
+	    	return $("<tr>").append(
+				$("<td>", { text: row_number + 1 }),
+				playboard
+			)
+		})
+		
+		$("#board_div").append(
+			$("<table>").append(
+				$("<tr>").append(
+					"<td></td>" + header
+				),
+				body
+			)
+		);		
+	}	
+}
+
