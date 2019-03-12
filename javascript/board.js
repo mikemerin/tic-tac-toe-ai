@@ -29,7 +29,7 @@ class Board extends Rules {
 	}
 	
 	display_board() {
-		$("#board")[0].innerHTML = ""; // ?
+		$("#board")[0].innerHTML = "";
 
 		var header = this.board[0].map(cell => {
 			var text = cell.id.split("_")[0]

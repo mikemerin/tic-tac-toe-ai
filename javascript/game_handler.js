@@ -8,8 +8,8 @@ class Game_handler {
 	}
 	
 	start_game(board_size) {
-		this.turn = "X";
 		this.status = "started";
+		this.move_made();
 		this.board.create_board();
 		this.board.display_board();
 		
