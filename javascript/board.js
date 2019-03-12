@@ -1,15 +1,31 @@
-class winner {
+class Gameplay {
+
+	end_game(winner = "") {
+		$(".playboard").each((i, cell) => $(cell).unbind() );
+		var game_status = winner ? winner + " has won!" : "Tie game!";
+		$("#game_status")[0].innerText = game_status;		
+	}
+	
+	check_if_tied() {
+		return this.board.every(row => {
+			return row.every(cell => this.check_if_filled(cell) );
+		})
+	}
 	
 	check_if_winner() {
-		winner = false;
+		var winner = false;
 
-		get_win_lines(this.board).forEach(line => {
+		this.get_win_lines(this.board).forEach(line => {
 			if (line.every((value) => value === line[0] && line[0] != "")) {
 				winner = line[0];
 			};
 		})
-		console.log(winner);
+
 		return winner;
+	}
+	
+	check_if_filled(cell) {
+		return cell.indexOf("_") < 0;
 	}
 
 	get_win_lines() {
@@ -37,18 +53,17 @@ class winner {
 	}
 }
 
-
-class Board extends winner {
+class Board extends Gameplay {
 	constructor() {
 		super();
-		this.board_size = 3;
+		this.board_size = "";
 		this.board = [];
 	}
 	
 	create_board(board_size) {
 		this.board_size = board_size;
 		for (let i = 0; i < this.board_size; i++) {
-			var alphabet_array = create_alphabet_array(this.board_size).map(letter => letter + (i + 1));
+			var alphabet_array = create_alphabet_array(this.board_size).map(letter => letter + "_" + (i + 1));
 			this.board.push(alphabet_array);
 		}
 	}
@@ -59,16 +74,17 @@ class Board extends winner {
 	
 	display_board() {
 		
-		$("#board").remove();
+		$("#board_div")[0].innerHTML = "";
+		$("#board_array")[0].innerHTML = "";
 		
 		var header = create_alphabet_array(this.board.length).map(letter => {
 			return $("<td>", { class: "board_cell", text: letter });
 	    })
 	    
 	    var body = this.board.map((row, row_number) => {
-
 	    	var playboard = row.map(cell => {
-	    		return $("<td>",  { class: 'playboard', id: cell });
+	    		var text = this.check_if_filled(cell) ? cell : ""; 
+	    		return $("<td>",  { class: 'playboard', id: cell, text: text });
 	    	})
 			
 	    	return $("<tr>").append(
@@ -94,7 +110,21 @@ class Board extends winner {
 	attach_listeners() {
 		$(".playboard").each((i, cell) => {
 			$(cell).click(e => {
-				console.log(cell.id)
+				if ( this.check_if_filled(cell.id) ) {
+					console.log("invalid move");					
+				} else {
+					var [col, row] = cell.id.split("_");
+					col = col.charCodeAt() - 65;
+					row = parseInt(row, 10) - 1;
+					this.board[row][col] = "X";
+					this.display_board();
+					var winner = this.check_if_winner();
+					if ( winner ) {
+						this.end_game(winner);
+					} else if ( this.check_if_tied() ) {
+						this.end_game();
+					}
+				}
 		    })
 		})
 	}
