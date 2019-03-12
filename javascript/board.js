@@ -8,8 +8,9 @@ class Board extends Rules {
 	}
 	
 	create_board() {
-		for (let i = 0; i < this.board_size; i++) {
-			var row = create_alphabet_array(3).map(letter => {
+		var [cols, rows] = this.board_size.split("x").map(x => parseInt(x, 10));
+		for (let i = 0; i < cols; i++) {
+			var row = create_alphabet_array(rows).map(letter => {
 			    return { id: letter + "_" + (i + 1), value: "" }
 			})
 			this.board.push(row);
