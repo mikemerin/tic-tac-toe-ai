@@ -29,13 +29,20 @@ class Rules {
 	}
 
 	get_diagonals(board) {
-	    var diagonal_left = [];
-	    var diagonal_right = [];
-
-	    board.forEach((row, row_number) => {
-	        diagonal_left.push( row[row.length - row_number - 1] );
-	        diagonal_right.push( row[row_number] );
-	    })
-	    return [diagonal_left, diagonal_right];
+		var diagonals = [];
+	    var rows = board.length;
+	    var cols = board[0].length;
+	    var difference = rows-cols;
+	    
+	    if (rows > cols) {
+	    	board = board[0].map((col, i) => board.map(row => row[i]))
+	    }
+	    
+	    for(let i = 0; i <= Math.abs(cols-rows); i++) {
+	    	diagonals.push( board.map((cell, col) => cell[col + i]) );
+	    	diagonals.push( board.map((cell, col) => cell[cell.length - (col + i + 1)]) );
+	    };
+	    
+	    return diagonals;
 	}
 }

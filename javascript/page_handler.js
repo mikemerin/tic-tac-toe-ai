@@ -16,7 +16,7 @@ function reset_page() {
 	$("#controls")[0].innerHTML = "";
 	$("#controls").unbind();
 	
-	["3x3", "3x4", "4x4", "4x5", "5x5"].forEach(size => {
+	["3x3", "3x4", "4x3", "4x4", "4x5", "5x5"].forEach(size => {
 		$("#controls").append($("<div>", { class: "control_board_size", text: size }));
 	})	
 	$("#controls").click(e => {

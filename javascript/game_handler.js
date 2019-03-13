@@ -58,7 +58,7 @@ class Game_handler {
 						this.move_made();
 					}
 				} else {
-//					$("#instructions")[0].innerText = ("invalid move");					
+					$("#instructions")[0].innerText = ("invalid move");					
 				}
 		    })
 		})
