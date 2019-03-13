@@ -9,11 +9,12 @@ class Game_handler {
 	
 	start_game(board_size) {
 		this.status = "started";
-		this.move_made();
 		this.board.create_board();
 		this.board.display_board();
 		
+		this.move_made();
 		this.attach_listeners();
+		update_scoreboard();
 		
 		$("#controls")[0].innerText = "Restart";
 		$("#controls").unbind();
@@ -25,10 +26,18 @@ class Game_handler {
 
 	end_game(winner = "") {
 		$(".playboard").each((i, cell) => $(cell).unbind() );
-		this.game_status = winner ? winner + " has won!" : "Tie game!";
+		if (winner) {
+			this.game_status = winner + " has won!";
+			wins[winner]++;
+		} else {
+			this.game_status = "Tie Game!";
+			wins["Ties"]++;
+		}
+		update_scoreboard();
 		$("#instructions")[0].innerText = $("#game_status")[0].innerText = this.game_status;		
 	}
 	
+
 	attach_listeners() {
 		$(".playboard").each((i, cell) => {
 			$(cell).click(e => {

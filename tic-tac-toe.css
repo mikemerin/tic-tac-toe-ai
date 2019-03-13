@@ -1,4 +1,4 @@
-body {
+body, .scoreboard {
 	text-align: center;
 	align: center;
 }
@@ -12,6 +12,11 @@ div {
 	top: 0;
 	left: 0;
 	right: 50%;
+}
+
+#scoreboard {
+	width: 40%;
+	text-align: center;
 }
 
 .control_board_size {

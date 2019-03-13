@@ -1,5 +1,3 @@
-//todo: move to game-handler?
-
 function create_alphabet_array(letters) {
 	var alphabet_array = [];
 	for(let char = 65; char < 65 + letters; char++) {
@@ -10,11 +8,25 @@ function create_alphabet_array(letters) {
 
 function reset_page() {
 	$("#instructions")[0].innerText = "What size board would you like to play?";
-	$("#controls")[0].innerText = "3";
+	
+	$("#board")[0].innerHTML = "";
 	$("#board_array")[0].innerHTML = "";
+	$("#game_status")[0].innerText = "";
+	
+	$("#controls")[0].innerHTML = "";
+	$("#controls").unbind();
+	
+	["3x3", "3x4", "4x4", "4x5", "5x5"].forEach(size => {
+		$("#controls").append($("<div>", { class: "control_board_size", text: size }));
+	})	
 	$("#controls").click(e => {
-		var game = new Game_handler(parseInt(e.target.innerText, 10));
+		var game = new Game_handler(e.target.innerText);
 		game.start_game();
 	})
-	$("#board")[0].innerHTML = "";
+}
+
+function update_scoreboard() {
+	Object.keys(wins).forEach(player => {
+		$("#scoreboard_" + player)[0].innerText = (player + ": " + wins[player]);
+	})
 }

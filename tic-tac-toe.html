@@ -4,7 +4,7 @@
 		<title>Tic Tac Toe AI</title>
 		<link rel="stylesheet" href="tic-tac-toe.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script type="text/javascript" src="./javascript/common.js"></script>
+		<script type="text/javascript" src="./javascript/page_handler.js"></script>
 		<script type="text/javascript" src="./javascript/game_handler.js"></script>
 		<script type="text/javascript" src="./javascript/rules.js"></script>
 		<script type="text/javascript" src="./javascript/board.js"></script>
@@ -13,6 +13,13 @@
 	<body>
 		<div class="top_left">
 			<h2>Welcome to Tic Tac Toe AI!</h2>
+			<table id="scoreboard" align="center" >
+				<tr>
+					<td class="scoreboard" id="scoreboard_X">X: 0</td>
+					<td class="scoreboard" id="scoreboard_O">O: 0</td>
+					<td class="scoreboard" id="scoreboard_Ties">Ties: 0</td>						
+				</tr>					
+			</table>
 			<p id="instructions"></p>
 			<h3 id="controls"></h3>
 			<h2 id="game_status"></h2>
@@ -29,7 +36,9 @@
 </html>
 
 <script>
+	var wins;
 	$(document).ready(function(e) {
+		wins = { "X": 0, "O": 0, "Ties": 0 }
 		reset_page();
 	});
 </script>
