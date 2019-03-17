@@ -1,4 +1,5 @@
 class Rules {
+	
 	check_if_tied(board) {
 		return board.every(row => {
 			return row.every(cell => cell !== "" );

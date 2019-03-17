@@ -1,32 +1,19 @@
-class Board extends Rules {
+class Board {
 	
-	constructor(board_size) {
-		super();
-		this.board_size = board_size;
+	constructor() {
 		this.board = [];
-		this.board_array
+		this.board_array = "";
+		this.board_size = "";		
 	}
 	
 	create_board() {
 		var [cols, rows] = this.board_size.split("x").map(x => parseInt(x, 10));
 		for (let i = 0; i < cols; i++) {
-			var row = create_alphabet_array(rows).map(letter => {
+			var row = page.create_alphabet_array(rows).map(letter => {
 			    return { id: letter + "_" + (i + 1), value: "" }
 			})
 			this.board.push(row);
 		}
-	}
-	
-	reset_board() {
-		this.board = [];
-	}
-	
-	set_board_array() {
-		this.board_array = this.board.map(row => {
-			return row.map(cell => {
-				return cell.value
-		    })
-		})
 	}
 	
 	display_board() {
@@ -59,6 +46,18 @@ class Board extends Rules {
 		
 //		$("#board_analytics").append( board_analytics );
 //		$("#board_array").append( this.board.map(cell => $("<p>", { text: cell.join(", ") })) );
+	}
+	
+	reset_board() {
+		this.board = [];
+	}
+	
+	set_board_array() {
+		this.board_array = this.board.map(row => {
+			return row.map(cell => {
+				return cell.value
+		    })
+		})
 	}
 	
 }
