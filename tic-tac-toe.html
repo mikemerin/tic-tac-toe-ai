@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Tic Tac Toe AI</title>
+		<title>Tic Tac Toe</title>
 		<link rel="stylesheet" href="tic-tac-toe.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script type="text/javascript" src="./javascript/page_handler.js"></script>
@@ -12,7 +12,7 @@
 	</head>
 	<body>
 		<div class="top_left">
-			<h2>Welcome to Tic Tac Toe AI!</h2>
+			<h2>Welcome to Tic Tac Toe!</h2>
 			<table id="scoreboard" align="center" >
 				<tr>
 					<td class="scoreboard" id="scoreboard_X"></td>
@@ -20,9 +20,14 @@
 					<td class="scoreboard" id="scoreboard_Ties"></td>						
 				</tr>					
 			</table>
-			<p id="instructions"></p>
-			<h3 id="controls"></h3>
-			<h2 id="game_status"></h2>
+			<br>
+			<h3 id="board_sizes"></h3>
+			<h3 id="game_status"></h3>
+			
+			<h3 id="game_mode"></h3>
+			
+			<h3 id="new_game">New Game</h3>
+			<h3 id="restart">Restart</h3>
 		</div>
 		
 		<div class="top_right" id="board_div">
@@ -38,7 +43,7 @@
 <script>
 	var page = new Page();
 	$(document).ready(function(e) {
-		page.reset_page()
+		page.toggle_UI()
 	});
 </script>
 

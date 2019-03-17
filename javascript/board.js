@@ -3,7 +3,12 @@ class Board {
 	constructor() {
 		this.board = [];
 		this.board_array = "";
-		this.board_size = "";		
+		this.board_size = "3x3";		
+	}
+	
+	clear_board() {
+		this.board = [];
+		this.board_array = "";
 	}
 	
 	create_board() {

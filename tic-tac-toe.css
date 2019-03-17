@@ -48,8 +48,13 @@ div {
 	height: 50px;
 }
 
-.playboard, #controls {
+.playboard, .control_board_size, #game_mode, #new_game, #restart {
 	cursor: pointer;
+}
+
+.selected {
+	outline-style: solid;
+	outline-color: black;
 }
 
 .playboard {

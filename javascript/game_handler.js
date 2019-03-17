@@ -5,20 +5,8 @@ class Game {
 	}
 	
 	start_game() {
-		page.status = "started";
-		page.board.create_board();
-		page.board.display_board();
-		
-		this.move_made();
 		this.attach_listeners();
-		page.update_scoreboard();
-		
-		$("#controls")[0].innerText = "Restart";
-		$("#controls").unbind();
-		$("#controls").click(e => {
-			page.board.reset_board();
-			page.reset_page();
-		})
+		this.move_made();
 	}
 
 	end_game(winner = "") {
@@ -31,12 +19,12 @@ class Game {
 			page.wins["Ties"]++;
 		}
 		page.update_scoreboard();
-		$("#instructions")[0].innerText = $("#game_status")[0].innerText = page.status;		
+		$("#game_status")[0].innerText = page.status;		
 	}
 	
 	move_made() {
-		this.turn = (this.turn === "X" ? "O" : "X"); 
-		$("#instructions")[0].innerText = "Player " + this.turn + "'s Turn";
+		this.turn = (this.turn === "X" ? "O" : "X");
+		page.status = "Player " + this.turn + "'s Turn"; 
 	}
 	
 	attach_listeners() {
