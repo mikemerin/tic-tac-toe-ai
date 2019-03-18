@@ -3,6 +3,7 @@ class Page {
 	constructor() {
 		this.board = new Board();
 		this.rules = new Rules();
+		this.CPU = new CPU();
 		this.player_X = "Human";
 		this.player_O = "Human";
 		this.status = "ready";
@@ -30,17 +31,11 @@ class Page {
 				var className = "player_" + letter;
 				var id = className + "_" + player;
 				$("#" + className).append($("<option>", { class: className, id: id, text: player }));
-
-				$("#" + className).change(e => {
-					if (letter === "X") {
-						this.player_X = player;
-					} else {
-						this.player_O = player;
-					}
-					this.toggle_UI();
-				})				
 			})
 		})
+		
+		$("#player_X").change(e => { this.player_X = e.target.value });
+		$("#player_O").change(e => { this.player_O = e.target.value });
 		
 		$("#new_game").click(e => {
 			this.board.create_board();
