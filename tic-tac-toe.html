@@ -15,18 +15,28 @@
 			<h2>Welcome to Tic Tac Toe!</h2>
 			<table id="scoreboard" align="center" >
 				<tr>
-					<td class="scoreboard" id="scoreboard_X"></td>
-					<td class="scoreboard" id="scoreboard_O"></td>
+					<td class="scoreboard" id="scoreboard_X" colspan=2></td>
 					<td class="scoreboard" id="scoreboard_Ties"></td>						
-				</tr>					
+					<td class="scoreboard" id="scoreboard_O" colspan=2></td>
+				</tr>
+				<tr>
+					<td colspan=2>
+						<select class="player_select" id="player_X"></select>
+						<p class="player_status" id="player_status_X"></p>
+					</td>
+					<td></td>
+					<td colspan=2>
+						<select class="player_select" id="player_O"></select>
+						<p class="player_status" id="player_status_O"></p>
+					</td>
+				</tr>
 			</table>
 			<br>
 			<h3 id="board_sizes"></h3>
-			<h3 id="game_status"></h3>
-			
-			<h3 id="game_mode"></h3>
-			
 			<h3 id="new_game">New Game</h3>
+
+			
+			<h3 id="game_status"></h3>
 			<h3 id="restart">Restart</h3>
 		</div>
 		
@@ -46,5 +56,3 @@
 		page.toggle_UI()
 	});
 </script>
-
-<!-- future todo: possible moves on bottom. step 1: show all moves and pick one that will win. step 2: train the model to pick the best move -->

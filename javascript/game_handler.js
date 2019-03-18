@@ -24,7 +24,7 @@ class Game {
 	
 	move_made() {
 		this.turn = (this.turn === "X" ? "O" : "X");
-		page.status = "Player " + this.turn + "'s Turn"; 
+		page.update_status_text(this.turn);
 	}
 	
 	attach_listeners() {
@@ -47,7 +47,7 @@ class Game {
 						this.move_made();
 					}
 				} else {
-					$("#instructions")[0].innerText = ("invalid move");					
+//					$("#instructions")[0].innerText = ("invalid move");					
 				}
 		    })
 		})

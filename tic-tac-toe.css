@@ -3,10 +3,6 @@ body, .scoreboard {
 	align: center;
 }
 
-div {
-	padding: 10px;
-}
-
 .top_left {
 	position: absolute;
 	top: 0;
@@ -15,12 +11,8 @@ div {
 }
 
 #scoreboard {
-	width: 40%;
+	width: 300px;
 	text-align: center;
-}
-
-.control_board_size {
-	display: inline;
 }
 
 .top_right {
@@ -30,11 +22,22 @@ div {
 	left: 50%;
 }
 
+.control_board_size, .game_mode {
+	display: inline;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
 .bottom {
 	position: absolute;
 	bottom: 0;
 	left: 25%;
 	right: 25%;
+}
+
+.player_status {
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 #board {
@@ -48,7 +51,7 @@ div {
 	height: 50px;
 }
 
-.playboard, .control_board_size, #game_mode, #new_game, #restart {
+.playboard, .control_board_size, .game_mode, #new_game, #restart {
 	cursor: pointer;
 }
 
