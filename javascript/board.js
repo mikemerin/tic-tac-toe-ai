@@ -2,13 +2,11 @@ class Board {
 
 	constructor() {
 		this.board = [];
-		this.board_array = "";
 		this.board_size = "3x3";
 	}
 
 	clear_board() {
 		this.board = [];
-		this.board_array = "";
 	}
 
 	create_board() {
@@ -29,15 +27,15 @@ class Board {
 			return $("<td>",  { class: "board_cell", text: text });
 		})
 
-	    var body = this.board.map((row, row_number) => {
-	    	var playboard = row.map(cell => {
-					return $("<td>",  { class: "playboard empty", id: cell.id, text: cell.value });
-	    	})
+    var body = this.board.map((row, row_number) => {
+    	var playboard = row.map(cell => {
+				return $("<td>",  { class: "playboard empty", id: cell.id, text: cell.value });
+    	})
 
-	    	return $("<tr>").append(
-					$("<td>", { class: "board_cell", text: row_number + 1 }),
-					playboard
-				)
+    	return $("<tr>").append(
+				$("<td>", { class: "board_cell", text: row_number + 1 }),
+				playboard
+			)
 		})
 
 		$("#board").append(
@@ -55,14 +53,6 @@ class Board {
 
 	reset_board() {
 		this.board = [];
-	}
-
-	set_board_array() {
-		this.board_array = this.board.map(row => {
-			return row.map(cell => {
-				return cell.value
-		    })
-		})
 	}
 
 }

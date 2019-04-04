@@ -4,9 +4,7 @@ class Page {
 		this.board = new Board();
 		this.rules = new Rules();
 		this.CPU = new CPU();
-		this.player = {};
-		this.player["X"] = "Human";
-		this.player["O"] = "Human";
+		this.player = { "X" : "Human", "O" : "Human" };
 		this.status = "ready";
 		this.wins = { "X": 0, "O": 0, "Ties": 0 };
 		// todo: separate wins for 1p/2p/etc with a function to sort which one for games/UI
@@ -53,25 +51,22 @@ class Page {
 
 	}
 
-	// var UI_fields = ["new_game", "board_sizes", "game_modes"];
-
 	toggle_UI() {
+		var [showing, hiding] = [".pre_game", ".in_game"];
 		if (this.status === "ready") {
 			$(".control_board_size").removeClass("selected");
 			$("#control_board_size_" + this.board.board_size).addClass("selected");
-
-			$(".game_mode").removeClass("selected");
-			$("#game_mode_" + this.game_mode).addClass("selected");
-
-			$(".pre_game").each((i,x) => $(x).show());
-			$(".in_game").each((i,x) => $(x).hide());
+			// future add-on
+			// $(".game_mode").removeClass("selected");
+			// $("#game_mode_" + this.game_mode).addClass("selected");
 		} else {
 			$("#player_status_X")[0].innerText = page.player["X"];
 			$("#player_status_O")[0].innerText = page.player["O"];
-
-			$(".pre_game").each((i,x) => $(x).hide());
-			$(".in_game").each((i,x) => $(x).show());
+			[hiding, showing] = [".pre_game", ".in_game"];
 		}
+
+		$(hiding).each((i,x) => $(x).hide());
+		$(showing).each((i,x) => $(x).show());
 		this.update_scoreboard();
 		this.update_status_text();
 	}
