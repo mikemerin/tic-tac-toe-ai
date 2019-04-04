@@ -51,7 +51,7 @@ body, .scoreboard {
 	height: 50px;
 }
 
-.playboard, .control_board_size, .game_mode, #new_game, #restart {
+.empty, .control_board_size, .game_mode, #new_game, #restart {
 	cursor: pointer;
 }
 

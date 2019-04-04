@@ -1,9 +1,9 @@
 class CPU {
-	
+
 	constructor() {
 		this.possible_moves = {};
 	}
-	
+
 	get_possible_moves() {
 		page.board.board.forEach(row => {
 			row.forEach(cell => {
@@ -11,7 +11,7 @@ class CPU {
 		    })
 		})
 	}
-	
+
 	test_possible_moves() {
 		var temp_board = page.board.board;
 		Object.keys(this.possible_moves).forEach(cell => {
@@ -19,7 +19,7 @@ class CPU {
 		})
 		debugger
 	}
-	
+
 	set_board_array() {
 		this.board_array = this.board.map(row => {
 			return row.map(cell => {
@@ -27,6 +27,6 @@ class CPU {
 		    })
 		})
 	}
-	
-	
+
+
 }
