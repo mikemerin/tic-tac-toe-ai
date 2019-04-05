@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tic Tac Toe</title>
+		<link rel="stylesheet" href="tic-tac-toe.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script type="text/javascript" src="./javascript/page_handler.js"></script>
+		<script type="text/javascript" src="./javascript/game_handler.js"></script>
+		<script type="text/javascript" src="./javascript/rules.js"></script>
+		<script type="text/javascript" src="./javascript/board.js"></script>
+		<script type="text/javascript" src="./javascript/CPU.js"></script>
+
+	</head>
+	<body>
+		<div class="top_left">
+			<h2>Welcome to Tic Tac Toe!</h2>
+			<table id="scoreboard" align="center" >
+				<tr>
+					<td class="scoreboard" id="scoreboard_X" colspan=2></td>
+					<td class="scoreboard" id="scoreboard_Ties"></td>
+					<td class="scoreboard" id="scoreboard_O" colspan=2></td>
+				</tr>
+				<tr>
+					<td colspan=2>
+						<select class="player_select pre_game" id="player_X"></select>
+						<p class="player_status in_game" id="player_status_X"></p>
+					</td>
+					<td></td>
+					<td colspan=2>
+						<select class="player_select pre_game" id="player_O"></select>
+						<p class="player_status in_game" id="player_status_O"></p>
+					</td>
+				</tr>
+			</table>
+			<br>
+			<h3 class="pre_game" id="board_sizes"></h3>
+			<h3 class="pre_game" id="new_game">New Game</h3>
+<!-- future add-on: game_modes -->
+
+			<h3 class="in_game" id="game_status"></h3>
+			<h3 class="in_game" id="restart">Restart</h3>
+		</div>
+
+		<div class="top_right" id="board_div">
+			<table class="in_game" id="board"></table>
+		</div>
+
+		<div class="bottom" id="analytics_div">
+			<h3 class="in_game" id="move_tree"></h3>
+		</div>
+	</body>
+</html>
+
+<script>
+	var page = new Page();
+	$(document).ready(function(e) {
+		page.toggle_UI()
+	});
+</script>
