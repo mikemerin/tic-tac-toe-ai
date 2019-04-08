@@ -1,5 +1,12 @@
 class Rules {
 
+	check_if_end_of_game(board) {
+		var board_array = this.convert_board_to_array(board)
+		var tied = this.check_if_tied(board_array);
+		var winner = this.check_if_winner(board_array);
+		return [tied, winner];
+	}
+
 	convert_board_to_array(board) {
 		return board.map(row => {
 			return row.map(cell => {
@@ -8,15 +15,13 @@ class Rules {
 		})
 	}
 
-	check_if_tied(board) {
-		var board_array = this.convert_board_to_array(board)
+	check_if_tied(board_array) {
 		return board_array.every(row => {
 			return row.every(cell => cell !== "" );
 		})
 	}
 
-	check_if_winner(board) {
-		var board_array = this.convert_board_to_array(board)
+	check_if_winner(board_array) {
 		var winner = false;
 		this.get_win_lines(board_array).forEach(line => {
 			if (line.every((value) => value === line[0] && line[0] != "")) {

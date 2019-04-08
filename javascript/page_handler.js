@@ -12,7 +12,7 @@ class Page {
 	}
 
 	create_UI() {
-		var board_sizes = ["3x3", "3x4", "4x3", "4x4", "4x5", "5x5"];
+		var board_sizes = ["2x2", "3x3", "3x4", "4x3", "4x4", "4x5", "5x5"];
 		var players = ["Human", "CPU"];
 
 		board_sizes.forEach(size => {
@@ -79,7 +79,7 @@ class Page {
 
 	update_status_text(turn = "") {
 		if (turn) {
-			this.status = "Player " + turn + "'s Turn";
+			this.status = "Player " + turn + "'s (" + page.player[this.game.turn] + ") Turn";
 			$(".player_status").each((i,x) => $(x).removeClass("selected"));
 			$("#player_status_" + turn).addClass("selected");
 		}
@@ -88,10 +88,14 @@ class Page {
 
 	create_alphabet_array(letters) {
 		var alphabet_array = [];
-		for(let char = 65; char < 65 + letters; char++) {
+		for (let char = 65; char < 65 + letters; char++) {
 	        alphabet_array.push(String.fromCharCode(char))
 	    }
 		return alphabet_array;
+	}
+
+	sleep(milliseconds) {
+	  return new Promise(resolve => setTimeout(resolve, milliseconds));
 	}
 
 }
