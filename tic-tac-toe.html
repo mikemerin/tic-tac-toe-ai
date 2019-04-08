@@ -3,7 +3,7 @@
 	<head>
 		<title>Tic Tac Toe</title>
 		<link rel="stylesheet" href="tic-tac-toe.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script type="text/javascript" src="./javascript/jquery-3.3.1.js"></script>
 		<script type="text/javascript" src="./javascript/page_handler.js"></script>
 		<script type="text/javascript" src="./javascript/game_handler.js"></script>
 		<script type="text/javascript" src="./javascript/rules.js"></script>
@@ -46,7 +46,11 @@
 		</div>
 
 		<div class="bottom" id="analytics_div">
-			<h3 id="board_array"></h3>
+			<h3 class="in_game" id="move_tree"></h3>
+			<p class="in_game" id="possible_moves_per_turn">
+				<table class="in_game" id="possible_moves_per_turn_table">
+				</table>
+			</p>
 		</div>
 	</body>
 </html>
