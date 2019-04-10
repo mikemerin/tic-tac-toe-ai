@@ -3,7 +3,7 @@ body, .scoreboard {
 	align: center;
 }
 
-.top_left {
+.top_left, .bottom_left {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -15,24 +15,24 @@ body, .scoreboard {
 	text-align: center;
 }
 
-.top_right {
+.top_right, .bottom_right {
 	position: absolute;
-	top: 0;
 	right: 0;
 	left: 50%;
+}
+
+.top_left, .top_right {
+	top: 0;
+}
+
+.bottom_left, .bottom_right {
+	top: 50%;
 }
 
 .control_board_size, .game_mode {
 	display: inline;
 	padding-left: 10px;
 	padding-right: 10px;
-}
-
-.bottom {
-	position: absolute;
-	bottom: 0;
-	left: 25%;
-	right: 25%;
 }
 
 .player_status {
@@ -51,7 +51,7 @@ body, .scoreboard {
 	height: 50px;
 }
 
-.playboard, .control_board_size, .game_mode, #new_game, #restart {
+.empty, .control_board_size, .game_mode, #new_game, #restart {
 	cursor: pointer;
 }
 
@@ -75,4 +75,8 @@ tr:nth-child(2) td {
 }
 tr:last-child td {
 	border-bottom-color: white;
+}
+
+#possible_moves_per_turn_table td, #possible_best_move_table td {
+	border: 1px solid black;
 }
