@@ -24,7 +24,7 @@ class Board {
 
 		var header = this.board[0].map(cell => {
 			var text = cell.id.split("_")[0]
-			return $("<td>",  { class: "board_cell", text: text });
+			return $("<th>",  { class: "board_cell", text: text });
 		})
 
     var body = this.board.map((row, row_number) => {
@@ -33,7 +33,7 @@ class Board {
     	})
 
     	return $("<tr>").append(
-				$("<td>", { class: "board_cell", text: row_number + 1 }),
+				$("<th>", { class: "board_cell", text: row_number + 1 }),
 				playboard
 			)
 		})

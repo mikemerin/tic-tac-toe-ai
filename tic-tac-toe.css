@@ -1,32 +1,40 @@
-body, .scoreboard {
+body {
+	height: 100%;
+}
+
+.container {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	height: 100%;
 	text-align: center;
+	align-items: stretch;
+	
 	align: center;
 }
 
-.top_left, .bottom_left {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 50%;
+#scoreboard_div {
+	grid-area: 1 / 1 / 2 / 7;
+}
+
+#board_div {
+	grid-area: 1 / 7 / 2 / 13;
+}
+
+#analytics_moves_per_turn_div {
+	grid-area: 2 / 1 / 4 / 5;
+}
+
+#analytics_move_tree_div {
+	grid-area: 2 / 5 / 4 / 9;
+}
+
+#analytics_best_move_div {
+	grid-area: 2 / 9 / 4 / 13;
 }
 
 #scoreboard {
-	width: 300px;
-	text-align: center;
-}
-
-.top_right, .bottom_right {
-	position: absolute;
-	right: 0;
-	left: 50%;
-}
-
-.top_left, .top_right {
-	top: 0;
-}
-
-.bottom_left, .bottom_right {
-	top: 50%;
+	width: 70%;
 }
 
 .control_board_size, .game_mode {
@@ -64,19 +72,26 @@ body, .scoreboard {
 	border: 5px solid black;
 }
 
-td:nth-child(2) {
-	border-left-color: white;
-}
-td:last-child {
-	border-right-color: white;
-}
-tr:nth-child(2) td {
-	border-top-color: white;
-}
-tr:last-child td {
-	border-bottom-color: white;
+.analytics_cell {
+	border: 1px solid black;
+	padding: 3px;
 }
 
-#possible_moves_per_turn_table td, #possible_best_move_table td {
-	border: 1px solid black;
+#possible_moves_per_turn_table, #possible_move_tree, #possible_best_move_table {
+  border-collapse: collapse;
+
 }
+
+td:nth-child(2) {
+	border-left: 0;
+}
+td:last-child {
+	border-right: 0;
+}
+tr:nth-child(2) td {
+	border-top: 0;
+}
+tr:last-child td {
+	border-bottom: 0;
+}
+

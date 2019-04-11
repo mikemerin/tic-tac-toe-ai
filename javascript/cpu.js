@@ -33,7 +33,8 @@ class CPU {
 				if (cell.value === "") {
 					var board_after_move = this.get_board_after_move(branch["board"], cell.id, turn);
 					var next_move = this.get_next_move( board_after_move );
-					this.calculate_possible_moves_per_turn(next_move, branch);
+					this.calculate_wins_and_losses_per_move(next_move, branch, cell.id);
+					this.calculate_possible_moves_per_turn(next_move, branch, turn);
 					all_next_moves[cell.id] = {"parent" : [...branch["parent"], cell.id], "board" :board_after_move, "moves" : next_move, "wins" : 0, "losses" : 0 };
 
 					if (next_move === "unknown") {
@@ -67,28 +68,31 @@ class CPU {
 		}
 		return next_move;
 	}
+	
+	calculate_wins_and_losses_per_move(move, branch, cell_id) {
+		var primary_move = branch["parent"].length > 1 ? branch["parent"][1] : cell_id;
+		
+		if (!this.move_tree["best_moves"][primary_move]) {
+			this.move_tree["best_moves"][primary_move] = {"wins" : 0, "losses" : 0};
+	    }
+		if (move !== "unkown" && move !== "tie") {
+			var win_or_lose = (this.player === move ? "wins" : "losses" );
+			this.move_tree["best_moves"][primary_move][win_or_lose]++;
+	    }
+	}
 
-	calculate_possible_moves_per_turn(move, branch) {
-		var primary_move = branch["parent"][1];
-		if (primary_move) {
-			if (!this.move_tree["best_moves"][primary_move]) {
-				this.move_tree["best_moves"][primary_move] = {"wins" : 0, "losses" : 0};
-		    }
-			if (move !== "unkown" && move !== "tie") {
-				var win_or_lose = (this.player === move ? "wins" : "losses" );
-				this.move_tree["best_moves"][primary_move][win_or_lose]++;
-		    }
-		}
-
+	calculate_possible_moves_per_turn(move, branch, turn) {
 		var turn_number = branch["parent"].length;
 
 		if (!this.possible_moves_per_turn[turn_number]) {
-			this.possible_moves_per_turn[turn_number] = { "total" : 0, "X": 0, "O": 0, "tie": 0, "unknown": 0 };
+			this.possible_moves_per_turn[turn_number] = { "total" : 0, "turn" : turn, "X": 0, "O": 0, "tie": 0, "unknown": 0 };
 		}
 		this.possible_moves_per_turn["total"][move]++;
 		this.possible_moves_per_turn["total"]["total"]++;
 		this.possible_moves_per_turn[turn_number][move]++;
 		this.possible_moves_per_turn[turn_number]["total"]++;
+		
+//		this.display_possible_moves_per_turn() // todo: actually add
 	}
 
 	display_possible_moves_per_turn() {
@@ -105,22 +109,22 @@ class CPU {
 		for (let i = 1; i < Object.keys(this.possible_moves_per_turn).length; i++) {
 
 			$("#possible_moves_per_turn_table").append($("<tr>").append(
-					$("<th>", { text: "Turn " + i}),
-					$("<td>", { text: this.possible_moves_per_turn[i]["X"]}),
-					$("<td>", { text: this.possible_moves_per_turn[i]["O"]}),
-					$("<td>", { text: this.possible_moves_per_turn[i]["tie"]}),
-					$("<td>", { text: this.possible_moves_per_turn[i]["unknown"]}),
-					$("<td>", { text: this.possible_moves_per_turn[i]["total"]})
+					$("<th>", { text: i + " (" + this.possible_moves_per_turn[i]["turn"] + ")" }),
+					$("<td>", { class: "analytics_cell", text: this.possible_moves_per_turn[i]["X"].toLocaleString() }),
+					$("<td>", { class: "analytics_cell", text: this.possible_moves_per_turn[i]["O"].toLocaleString() }),
+					$("<td>", { class: "analytics_cell", text: this.possible_moves_per_turn[i]["tie"].toLocaleString() }),
+					$("<td>", { class: "analytics_cell", text: this.possible_moves_per_turn[i]["unknown"].toLocaleString() }),
+					$("<td>", { class: "analytics_cell", text: this.possible_moves_per_turn[i]["total"].toLocaleString() })
 			))
 		}
 
 		$("#possible_moves_per_turn_table").append($("<tr>").append(
 				$("<th>", { text: "Total"}),
-				$("<td>", { text: this.possible_moves_per_turn["total"]["X"]}),
-				$("<td>", { text: this.possible_moves_per_turn["total"]["O"]}),
-				$("<td>", { text: this.possible_moves_per_turn["total"]["tie"]}),
-				$("<td>", { text: this.possible_moves_per_turn["total"]["unknown"]}),
-				$("<td>", { text: this.possible_moves_per_turn["total"]["total"]})
+				$("<td>", { class: "analytics_cell", text: this.possible_moves_per_turn["total"]["X"].toLocaleString() }),
+				$("<td>", { class: "analytics_cell", text: this.possible_moves_per_turn["total"]["O"].toLocaleString() }),
+				$("<td>", { class: "analytics_cell", text: this.possible_moves_per_turn["total"]["tie"].toLocaleString() }),
+				$("<td>", { class: "analytics_cell", text: this.possible_moves_per_turn["total"]["unknown"].toLocaleString() }),
+				$("<td>", { class: "analytics_cell", text: this.possible_moves_per_turn["total"]["total"].toLocaleString() })
 		))
 	}
 
@@ -142,7 +146,7 @@ class CPU {
 
 	display_best_move_table(rows) {
 		// todo: move to page.js
-		var fields = ["Move", "Wins", "Losses", "Score"];
+		var fields = ["", "Wins", "Losses", "Score"];
 		var header = fields.map(field => $("<th>", { text: field}));
 
 		$("#possible_best_move_table")[0].innerHTML = "";
@@ -151,9 +155,9 @@ class CPU {
 		rows.forEach(row => {
 			$("#possible_best_move_table").append($("<tr>").append(
 				$("<th>", { text : row["move"] }),
-				$("<td>", { text : row["wins_losses"]["wins"] }),
-				$("<td>", { text : row["wins_losses"]["losses"] }),
-				$("<td>", { text : row["score"] })
+				$("<td>", { class: "analytics_cell", text : row["wins_losses"]["wins"] }),
+				$("<td>", { class: "analytics_cell", text : row["wins_losses"]["losses"] }),
+				$("<td>", { class: "analytics_cell", text : row["score"] })
 			))
 		})
 	}

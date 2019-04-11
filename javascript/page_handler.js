@@ -37,11 +37,14 @@ class Page {
 		$("#player_O").change(e => { this.player["O"] = e.target.value });
 
 		$("#new_game").click(e => {
+			this.status = "starting game";
+			this.toggle_UI();
 			this.board.create_board();
 			this.board.display_board();
-			this.game = new Game();
-			this.game.start_game();
-			this.toggle_UI();
+			page.sleep(1000).then(()=> {
+				this.game = new Game();
+				this.game.start_game();	
+			});			
 		})
 
 		$("#restart").click(e => {

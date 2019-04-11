@@ -18,6 +18,15 @@ class Game {
 			})
 		})
 	}
+	
+	next_move() {
+		this.turn = (this.turn === "X" ? "O" : "X");
+		page.update_status_text(this.turn);
+		if (page.player[this.turn] === "CPU") {
+			var move = page.CPU.get_best_move();
+			page.sleep(2000).then(()=> { this.make_a_move(move); }); // todo: change this a bit to make it more human
+		}
+	}
 
 	make_a_move(cell_id) {
 		var [col, row] = cell_id.split("_");
@@ -53,15 +62,6 @@ class Game {
 		}
 		page.update_scoreboard();
 		page.update_status_text();
-	}
-
-	next_move() {
-		this.turn = (this.turn === "X" ? "O" : "X");
-		page.update_status_text(this.turn);
-		if (page.player[this.turn] === "CPU") {
-			var move = page.CPU.get_best_move();
-			page.sleep(2000).then(()=> { this.make_a_move(move); });
-		}
 	}
 
 }
