@@ -41,7 +41,7 @@ class Page {
 			this.toggle_UI();
 			this.board.create_board();
 			this.board.display_board();
-			page.sleep(1000).then(()=> {
+			page.sleep(1000).then(()=> { // todo: make async after board is displayed
 				this.game = new Game();
 				this.game.start_game();	
 			});			

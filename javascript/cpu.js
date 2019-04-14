@@ -39,7 +39,7 @@ class CPU {
 
 					if (next_move === "unknown") {
 						all_next_moves[cell.id]["moves"] = this.get_all_next_moves(all_next_moves[cell.id], turn);
-					};
+					}
 				};
 			})
 		})
@@ -75,7 +75,7 @@ class CPU {
 		if (!this.move_tree["best_moves"][primary_move]) {
 			this.move_tree["best_moves"][primary_move] = {"wins" : 0, "losses" : 0};
 	    }
-		if (move !== "unkown" && move !== "tie") {
+		if (move !== "unknown" && move !== "tie") {
 			var win_or_lose = (this.player === move ? "wins" : "losses" );
 			this.move_tree["best_moves"][primary_move][win_or_lose]++;
 	    }
