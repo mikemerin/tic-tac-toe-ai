@@ -12,7 +12,7 @@ You can play Human vs. Human, 1P vs. a CPU, or watch two CPUs battle it out. The
 
 ### CPU Brain
 
-While playing against a CPU, you can see how it chooses its best move by looking at its win/loss predictions along with all moves that can be played. 
+While playing against a CPU you can see its analytics. It will display all the possible moves and its win/loss predictions. 
 
 ### Future updates
 - Board - create 3D chess using multiple boards
